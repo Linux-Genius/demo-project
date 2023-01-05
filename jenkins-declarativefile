@@ -1,9 +1,18 @@
 pipeline{
     agent any
+    
+       enviroment{
+            PATH = "/opt/maven3/bin/bin:$PATH"
+        }
        stages{
            stage("git checkout"){
                steps{
                    git branch: 'main', url: 'https://github.com/Linux-Genius/demo-project.git'
+               }
+           }
+           stage("maven build"){
+               steps{
+                  sh "maven clean package"
                }
            }
        }
